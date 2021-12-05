@@ -2,8 +2,10 @@
 require 'vendor/autoload.php';
 
 use Dotenv\Dotenv;
-use Abraham\TwitterOAuth\TwitterOAuth;
 use GuzzleHttp\Client;
+use SpotifyWebAPI\Session;
+use SpotifyWebAPI\SpotifyWebAPI;
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 $env = Dotenv::createImmutable(__DIR__);
 $env->load();
@@ -32,12 +34,12 @@ $artist = $response->toptracks->track[0]->artist->name;
 $query = '"' . $track . '" ' . '"' . $artist . '"';
 
 //spotifyでトラック情報の取得
-$session = new SpotifyWebAPI\Session(
+$session = new Session(
     $_ENV['SPOTIFY_CLIENT_ID'],
     $_ENV['SPOTIFY_CLIENT_SECRET'],
 );
 
-$spotify = new SpotifyWebAPI\SpotifyWebAPI();
+$spotify = new SpotifyWebAPI();
 $session->requestCredentialsToken();
 $accessToken = $session->getAccessToken();
 $spotify->setAccessToken($accessToken);
