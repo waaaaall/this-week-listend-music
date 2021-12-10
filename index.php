@@ -76,3 +76,9 @@ $twitter->post(
     ],
     true
 );
+if ($twitter->getLastHttpCode() === 201) {
+    $tweet_id = $twitter->getLastBody()->data->id;
+    echo "success! https://twitter.com/good_wall/status/$tweet_id\n";
+} else {
+    echo 'failed!';
+}
